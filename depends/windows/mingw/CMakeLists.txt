@@ -34,8 +34,8 @@ execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c 
 execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "rm /var/lib/pacman/sync/*")
 execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "sed -i s/^XferCommand/#sXferCommand/g /etc/pacman.conf")
 execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "echo n | pacman -Syuu")
-execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "sed -i s/^#sXferCommand/XferCommand/g /etc/pacman.conf")
 execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "pacman --noconfirm -S make ${HOST}-gcc")
+execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "sed -i s/^#sXferCommand/XferCommand/g /etc/pacman.conf")
 
 if($ENV{PROCESSOR_ARCHITECTURE} MATCHES "ARM64")
    # mingw-w64-cross-mingwarm64 does not create gcc anywhere in the path

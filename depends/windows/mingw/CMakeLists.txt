@@ -43,8 +43,10 @@ if($ENV{PROCESSOR_ARCHITECTURE} MATCHES "ARM64")
     "which gcc || find /opt/bin -type f -name 'aarch64-w64-mingw32-*' -exec /bin/bash -c 'ln -s {} $(echo /opt/bin/{} | sed -e ''s#/opt/bin/aarch64-w64-mingw32-##g'')' \\;")
 endif()
 
-file(GLOB_RECURSE shared_libs ${CMAKE_CURRENT_SOURCE_DIR}/${MINGW_PATH}/*.dll.a)
-file(REMOVE ${shared_libs})
+if(NOT $ENV{PROCESSOR_ARCHITECTURE} MATCHES "ARM64")
+   file(GLOB_RECURSE shared_libs ${CMAKE_CURRENT_SOURCE_DIR}/${MINGW_PATH}/*.dll.a)
+   file(REMOVE ${shared_libs})
+endif()
 
 configure_file(MinGWConfig.cmake.in MinGWConfig.cmake @ONLY)
 configure_file(make.bat.in ${CMAKE_CURRENT_SOURCE_DIR}/${MINGW_PATH}/bin/make.bat @ONLY)
